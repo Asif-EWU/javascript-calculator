@@ -1,2 +1,2 @@
-# javascript-calculator
+# basic-calculator
 javascript practice project
