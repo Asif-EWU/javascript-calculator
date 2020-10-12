@@ -27,6 +27,7 @@ function calculate() {
   }
 }
 
+
 //    OPERAND BUTTONS
 const operandList = document.getElementsByClassName('operand');
 
