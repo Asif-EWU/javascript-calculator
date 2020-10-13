@@ -54,8 +54,20 @@ for(let i = 0; i < operandList.length; i++) {
 }
 
 
+//    NEGATIVE BUTTON
+document.getElementById('negative').addEventListener('click', function() {
+  if(!newOperand) newOperand = '-';
+  else {
+    newOperand = parseFloat(newOperand);
+    newOperand *= -1;
+  }
+  updateOperand();
+})
+
+
 //    FRACTION BUTTON
 document.getElementById('fraction').addEventListener('click', function() {
+  // user can't input fraction point multiple times
   if(!isFraction(newOperand)) newOperand += '.';
   updateOperand();
 });
