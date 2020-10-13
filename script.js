@@ -7,6 +7,15 @@ function updateOperand() {
   document.getElementById('new-operand').innerText = newOperand;
 }
 
+function isFraction(operand) {
+  operand += "";
+  for(let i = 0; i < operand.length; i++) {
+    if(operand[i] == '.') 
+      return true;
+  }
+  return false;
+}
+
 function calculate() {
   const operand1 = parseFloat(currentOperand);
   const operand2 = parseFloat(newOperand);
@@ -25,6 +34,8 @@ function calculate() {
       currentOperand = operand1 / operand2;
       break;
   }
+
+  if(isFraction(currentOperand)) currentOperand = currentOperand.toFixed(5);
 }
 
 
@@ -33,13 +44,21 @@ const operandList = document.getElementsByClassName('operand');
 
 for(let i = 0; i < operandList.length; i++) {
   const item = operandList[i];
+  
   item.addEventListener('click', function() {
     const lastDigit = item.innerText;
-    if(!newOperand) newOperand = lastDigit;
-    else newOperand = newOperand + lastDigit;
-    document.getElementById('new-operand').innerText = newOperand;
+
+    newOperand = newOperand + lastDigit;
+    updateOperand();
   });
 }
+
+
+//    FRACTION BUTTON
+document.getElementById('fraction').addEventListener('click', function() {
+  if(!isFraction(newOperand)) newOperand += '.';
+  updateOperand();
+});
 
 
 //     DEL BUTTON
@@ -94,7 +113,7 @@ document.getElementById('ac').addEventListener('click', function() {
 
 //    EQUAL BUTTON
 document.getElementById('equal').addEventListener('click', function() {
-  if(currentOperand) {
+  if(currentOperand && newOperand) {
     calculate();
     newOperand = currentOperand;
     currentOperand = currentOperator = "";
